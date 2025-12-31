@@ -1,0 +1,1730 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KaamKaro - Earn Money from Mobile</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#667eea">
+    
+    <!-- Custom CSS -->
+    <style>
+        :root {
+            --primary-color: #667eea;
+            --secondary-color: #764ba2;
+            --success-color: #28a745;
+            --danger-color: #dc3545;
+            --warning-color: #ffc107;
+            --info-color: #17a2b8;
+            --light-color: #f8f9fa;
+            --dark-color: #343a40;
+            --white-color: #ffffff;
+            --gray-color: #6c757d;
+            --border-radius: 15px;
+            --box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 0;
+            color: #333;
+        }
+        
+        /* Mobile App Container */
+        .mobile-container {
+            max-width: 500px;
+            margin: 0 auto;
+            background: var(--white-color);
+            min-height: 100vh;
+            box-shadow: 0 0 30px rgba(0,0,0,0.2);
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: var(--white-color);
+            padding: 25px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header:before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: float 20s linear infinite;
+            z-index: 0;
+        }
+        
+        @keyframes float {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .logo {
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 8px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .tagline {
+            font-size: 14px;
+            opacity: 0.9;
+            font-weight: 300;
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Navigation Tabs */
+        .nav-tabs {
+            background: var(--white-color);
+            border-bottom: 2px solid #f0f0f0;
+            padding: 0 10px;
+        }
+        
+        .nav-item {
+            flex: 1;
+        }
+        
+        .nav-link {
+            color: var(--gray-color);
+            font-weight: 600;
+            padding: 15px 5px;
+            border: none;
+            border-radius: 0;
+            background: transparent;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+            transition: var(--transition);
+            font-size: 12px;
+        }
+        
+        .nav-link i {
+            font-size: 20px;
+            margin-bottom: 5px;
+        }
+        
+        .nav-link.active {
+            color: var(--primary-color);
+            background: transparent;
+            border-bottom: 3px solid var(--primary-color);
+        }
+        
+        .nav-link:hover {
+            color: var(--primary-color);
+        }
+        
+        /* Tab Content */
+        .tab-content {
+            padding: 20px;
+        }
+        
+        /* Balance Card */
+        .balance-card {
+            background: linear-gradient(135deg, var(--success-color) 0%, #1e7e34 100%);
+            color: var(--white-color);
+            border-radius: var(--border-radius);
+            padding: 25px;
+            margin: 0 0 25px 0;
+            text-align: center;
+            box-shadow: var(--box-shadow);
+            position: relative;
+            overflow: hidden;
+            transition: var(--transition);
+        }
+        
+        .balance-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+        }
+        
+        .balance-card:before {
+            content: '💰';
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 40px;
+            opacity: 0.2;
+        }
+        
+        .balance-amount {
+            font-size: 42px;
+            font-weight: 800;
+            margin: 15px 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            font-family: 'Courier New', monospace;
+        }
+        
+        /* Task Cards */
+        .task-card {
+            background: var(--white-color);
+            border-radius: var(--border-radius);
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid #e0e0e0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .task-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            border-color: var(--primary-color);
+        }
+        
+        .task-card:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--primary-color), var(--secondary-color));
+        }
+        
+        .task-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white-color);
+            font-size: 28px;
+            margin-right: 15px;
+            flex-shrink: 0;
+            box-shadow: 0 4px 10px rgba(102, 126, 234, 0.3);
+        }
+        
+        .task-reward {
+            background: var(--success-color);
+            color: var(--white-color);
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 14px;
+            display: inline-block;
+            box-shadow: 0 2px 5px rgba(40, 167, 69, 0.3);
+        }
+        
+        /* Buttons */
+        .btn-earn {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: var(--white-color);
+            border: none;
+            padding: 14px 25px;
+            border-radius: 25px;
+            font-weight: 700;
+            font-size: 16px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 15px;
+            transition: var(--transition);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .btn-earn:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+        
+        .btn-earn:active {
+            transform: translateY(0);
+        }
+        
+        .withdraw-btn {
+            background: var(--white-color);
+            color: var(--success-color);
+            border: 2px solid var(--success-color);
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-weight: 700;
+            margin-top: 15px;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+        
+        .withdraw-btn:hover {
+            background: var(--success-color);
+            color: var(--white-color);
+        }
+        
+        /* Form Elements */
+        .form-control {
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+            border: 2px solid #e0e0e0;
+            font-size: 16px;
+            transition: var(--transition);
+            background: var(--light-color);
+        }
+        
+        .form-control:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.25rem rgba(102, 126, 234, 0.25);
+            background: var(--white-color);
+        }
+        
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin: 20px 0;
+        }
+        
+        .stat-card {
+            background: var(--white-color);
+            border-radius: 12px;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            transition: var(--transition);
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+        
+        .stat-value {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--primary-color);
+            margin: 5px 0;
+        }
+        
+        .stat-label {
+            font-size: 12px;
+            color: var(--gray-color);
+            font-weight: 500;
+        }
+        
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 20px;
+            background: var(--light-color);
+            color: var(--gray-color);
+            font-size: 14px;
+            border-top: 1px solid #e0e0e0;
+            margin-top: 20px;
+        }
+        
+        /* Notification */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 25px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            z-index: 1000;
+            animation: slideIn 0.3s ease-out;
+            max-width: 300px;
+            display: none;
+        }
+        
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        .notification.success {
+            background: var(--success-color);
+            color: var(--white-color);
+        }
+        
+        .notification.error {
+            background: var(--danger-color);
+            color: var(--white-color);
+        }
+        
+        .notification.warning {
+            background: var(--warning-color);
+            color: var(--dark-color);
+        }
+        
+        .notification.info {
+            background: var(--info-color);
+            color: var(--white-color);
+        }
+        
+        /* How It Works Section */
+        .how-it-works {
+            background: #f8f9ff;
+            border-radius: var(--border-radius);
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .step {
+            display: flex;
+            align-items: center;
+            margin: 15px 0;
+        }
+        
+        .step-number {
+            width: 40px;
+            height: 40px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        
+        /* Loading Spinner */
+        .spinner {
+            display: none;
+            width: 40px;
+            height: 40px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Responsive */
+        @media (max-width: 576px) {
+            .mobile-container {
+                max-width: 100%;
+                border-radius: 0;
+            }
+            
+            .balance-amount {
+                font-size: 36px;
+            }
+            
+            .task-card {
+                padding: 15px;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 8px;
+            }
+            
+            .stat-value {
+                font-size: 20px;
+            }
+        }
+        
+        /* Animation for new elements */
+        .fade-in {
+            animation: fadeIn 0.5s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Referral Section */
+        .referral-section {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+            border-radius: var(--border-radius);
+            padding: 20px;
+            margin: 20px 0;
+            color: #333;
+        }
+        
+        /* Connection Status */
+        .connection-status {
+            position: fixed;
+            bottom: 10px;
+            left: 10px;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 12px;
+            z-index: 1000;
+        }
+        
+        .connection-status.connected {
+            background: rgba(40, 167, 69, 0.8);
+        }
+        
+        .connection-status.disconnected {
+            background: rgba(220, 53, 69, 0.8);
+        }
+        
+        /* Modal Styles */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 25px;
+            max-width: 400px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: var(--box-shadow);
+        }
+        
+        /* Install App Banner */
+        .install-banner {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            padding: 15px;
+            box-shadow: 0 -4px 20px rgba(0,0,0,0.1);
+            z-index: 1001;
+            border-radius: 20px 20px 0 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Mobile App Container -->
+    <div class="mobile-container">
+        <!-- Header -->
+        <div class="header">
+            <div class="logo">💰 KaamKaro</div>
+            <div class="tagline">Complete Tasks. Earn Real Money!</div>
+        </div>
+        
+        <!-- Navigation Tabs -->
+        <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button">
+                    <i class="fas fa-home"></i> Home
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="tasks-tab" data-bs-toggle="tab" data-bs-target="#tasks" type="button">
+                    <i class="fas fa-tasks"></i> Tasks
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="earn-tab" data-bs-toggle="tab" data-bs-target="#earn" type="button">
+                    <i class="fas fa-money-bill-wave"></i> Earn
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button">
+                    <i class="fas fa-user"></i> Profile
+                </button>
+            </li>
+        </ul>
+        
+        <!-- Tab Content -->
+        <div class="tab-content" id="myTabContent">
+            <!-- Home Tab -->
+            <div class="tab-pane fade show active" id="home" role="tabpanel">
+                <!-- Balance Card -->
+                <div class="balance-card">
+                    <div>Your Balance</div>
+                    <div class="balance-amount" id="balanceAmount">₹ 0.00</div>
+                    <div id="connectionMessage">Checking connection...</div>
+                    <button class="withdraw-btn" onclick="showWithdrawModal()">
+                        <i class="fas fa-rupee-sign"></i> Withdraw Money
+                    </button>
+                </div>
+                
+                <!-- Quick Stats -->
+                <h5 class="mb-3">📊 Quick Stats</h5>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-value" id="tasksDone">0</div>
+                        <div class="stat-label">Tasks Done</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="earnedToday">₹0</div>
+                        <div class="stat-label">Earned Today</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="referralsCount">0</div>
+                        <div class="stat-label">Referrals</div>
+                    </div>
+                </div>
+                
+                <!-- How It Works -->
+                <div class="how-it-works">
+                    <h5 class="mb-3">🚀 How It Works</h5>
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div>
+                            <h6 style="margin:0">Select a Task</h6>
+                            <small>Choose from various earning tasks</small>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div>
+                            <h6 style="margin:0">Complete It</h6>
+                            <small>Follow simple instructions</small>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div>
+                            <h6 style="margin:0">Get Paid</h6>
+                            <small>Money added to your balance instantly</small>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Quick Actions -->
+                <h5 class="mb-3">⚡ Quick Actions</h5>
+                <div class="row">
+                    <div class="col-6 mb-3">
+                        <button class="btn-earn" onclick="document.getElementById('tasks-tab').click()">
+                            <i class="fas fa-play-circle"></i> Start Earning
+                        </button>
+                    </div>
+                    <div class="col-6 mb-3">
+                        <button class="btn-earn" style="background:linear-gradient(135deg, #FF416C 0%, #FF4B2B 100%)" 
+                                onclick="document.getElementById('earn-tab').click()">
+                            <i class="fas fa-users"></i> Refer & Earn
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Connection Test Section -->
+                <div class="mt-4 p-3" style="background:#f8f9fa; border-radius:10px; display:none;" id="connectionTestSection">
+                    <h6>🔧 Connection Test</h6>
+                    <button class="btn btn-sm btn-primary me-2" onclick="testConnection()">Test API</button>
+                    <button class="btn btn-sm btn-secondary" onclick="toggleDebug()">Debug Mode</button>
+                    <div id="testResult" class="mt-2"></div>
+                </div>
+            </div>
+            
+            <!-- Tasks Tab -->
+            <div class="tab-pane fade" id="tasks" role="tabpanel">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h5>📋 Available Tasks</h5>
+                    <button class="btn btn-sm btn-outline-primary" onclick="refreshTasks()">
+                        <i class="fas fa-sync-alt"></i> Refresh
+                    </button>
+                </div>
+                <div id="tasksContainer">
+                    <div class="text-center">
+                        <div class="spinner" id="tasksSpinner"></div>
+                        <p>Loading tasks...</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Earn Tab -->
+            <div class="tab-pane fade" id="earn" role="tabpanel">
+                <h5 class="mb-3">💰 Earn More</h5>
+                
+                <!-- Referral Section -->
+                <div class="referral-section">
+                    <h6><i class="fas fa-users"></i> Refer & Earn</h6>
+                    <small>Invite friends and earn ₹50 for each referral</small>
+                    <div class="mt-3">
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="referralCode" value="Loading..." readonly>
+                            <button class="btn btn-light" onclick="copyReferralCode()">
+                                <i class="fas fa-copy"></i> Copy
+                            </button>
+                        </div>
+                        <small class="d-block mt-2">Share this code with friends</small>
+                    </div>
+                </div>
+                
+                <!-- Daily Bonus -->
+                <div class="task-card">
+                    <h6><i class="fas fa-gift"></i> Daily Bonus</h6>
+                    <small>Login daily to get bonus rewards</small>
+                    <div class="mt-2">
+                        <div class="progress" style="height: 20px;">
+                            <div class="progress-bar" id="dailyProgress" style="width: 0%;">Day 0/7</div>
+                        </div>
+                        <small id="dailyBonusText">Login daily to unlock bonus</small>
+                    </div>
+                    <button class="btn-earn mt-2" onclick="claimDailyBonus()" id="dailyBonusBtn" disabled>
+                        <i class="fas fa-gift"></i> Claim Daily Bonus
+                    </button>
+                </div>
+                
+                <!-- Challenges -->
+                <div class="task-card">
+                    <h6><i class="fas fa-trophy"></i> Challenges</h6>
+                    <small>Complete challenges for extra money</small>
+                    <div class="mt-2">
+                        <div class="d-flex justify-content-between">
+                            <span>Complete 10 tasks</span>
+                            <span class="task-reward">₹50 Bonus</span>
+                        </div>
+                        <div class="progress mt-1" style="height: 8px;">
+                            <div class="progress-bar bg-warning" id="challengeProgress" style="width: 0%;"></div>
+                        </div>
+                        <small id="challengeText">0/10 completed</small>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Profile Tab -->
+            <div class="tab-pane fade" id="profile" role="tabpanel">
+                <!-- User Profile Section -->
+                <div id="loggedInSection" style="display: none;">
+                    <div class="text-center mb-4" id="profileDisplay">
+                        <!-- Profile will be loaded here -->
+                    </div>
+                    
+                    <h6>Account Settings</h6>
+                    <div class="list-group mb-4">
+                        <a href="#" class="list-group-item list-group-item-action" onclick="showWithdrawModal()">
+                            <i class="fas fa-wallet me-2"></i> Withdraw Money
+                        </a>
+                        <a href="#" class="list-group-item list-group-item-action" onclick="showTransactionHistory()">
+                            <i class="fas fa-history me-2"></i> Transaction History
+                        </a>
+                        <a href="#" class="list-group-item list-group-item-action" onclick="showReferrals()">
+                            <i class="fas fa-users me-2"></i> My Referrals
+                        </a>
+                        <a href="#" class="list-group-item list-group-item-action" onclick="showSupport()">
+                            <i class="fas fa-headset me-2"></i> Support
+                        </a>
+                        <a href="#" class="list-group-item list-group-item-action text-danger" onclick="logout()">
+                            <i class="fas fa-sign-out-alt me-2"></i> Logout
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Login/Register Section -->
+                <div id="authSection">
+                    <div id="loginSection">
+                        <h6 class="mb-3"><i class="fas fa-sign-in-alt"></i> Login</h6>
+                        <input type="email" class="form-control" id="loginEmail" placeholder="Email Address" value="demo@kaamkaro.com">
+                        <input type="password" class="form-control" id="loginPassword" placeholder="Password" value="demo123">
+                        <button class="btn-earn" onclick="login()">
+                            <i class="fas fa-sign-in-alt"></i> Login
+                        </button>
+                        <div class="text-center mt-3">
+                            <small>Don't have account? <a href="#" onclick="showRegisterForm()">Register here</a></small>
+                        </div>
+                        
+                        <!-- Demo Credentials -->
+                        <div class="mt-3 p-3" style="background:#f8f9fa; border-radius:10px; font-size:12px;">
+                            <strong>Demo Credentials:</strong><br>
+                            Email: demo@kaamkaro.com<br>
+                            Password: demo123
+                        </div>
+                    </div>
+                    
+                    <div id="registerSection" style="display: none;">
+                        <h6 class="mb-3"><i class="fas fa-user-plus"></i> Create Account</h6>
+                        <input type="text" class="form-control" id="regName" placeholder="Full Name">
+                        <input type="email" class="form-control" id="regEmail" placeholder="Email Address">
+                        <input type="password" class="form-control" id="regPassword" placeholder="Password">
+                        <input type="text" class="form-control" id="regPhone" placeholder="Phone Number (Optional)">
+                        <input type="text" class="form-control" id="regReferral" placeholder="Referral Code (Optional)">
+                        <button class="btn-earn" onclick="register()">
+                            <i class="fas fa-user-plus"></i> Register
+                        </button>
+                        <div class="text-center mt-3">
+                            <small>Already have account? <a href="#" onclick="showLoginForm()">Login here</a></small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Footer -->
+        <div class="footer">
+            <div>💰 KaamKaro - Earn From Mobile</div>
+            <small>© 2024 All rights reserved | Status: <span id="apiStatusText">Checking...</span></small>
+        </div>
+    </div>
+    
+    <!-- Notification -->
+    <div class="notification" id="notification"></div>
+    
+    <!-- Connection Status Indicator -->
+    <div class="connection-status" id="connectionStatus">🔍 Checking...</div>
+    
+    <!-- Withdraw Modal -->
+    <div class="modal-overlay" id="withdrawModal">
+        <div class="modal-content">
+            <h5><i class="fas fa-wallet"></i> Withdraw Money</h5>
+            <p class="text-muted">Minimum withdrawal: ₹100</p>
+            
+            <div class="mb-3">
+                <label>Amount (₹)</label>
+                <input type="number" class="form-control" id="withdrawAmount" placeholder="Enter amount" min="100" step="50">
+            </div>
+            
+            <div class="mb-3">
+                <label>UPI ID</label>
+                <input type="text" class="form-control" id="withdrawUpi" placeholder="example@upi">
+            </div>
+            
+            <div class="d-flex gap-2">
+                <button class="btn btn-secondary flex-fill" onclick="hideWithdrawModal()">Cancel</button>
+                <button class="btn btn-success flex-fill" onclick="submitWithdrawal()">Withdraw</button>
+            </div>
+            
+            <div class="mt-3 p-2 bg-light rounded">
+                <small><i class="fas fa-info-circle text-primary"></i> Withdrawals are processed within 24 hours</small>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Install App Banner -->
+    <div class="install-banner" id="installBanner">
+        <div class="d-flex align-items-center justify-content-between">
+            <div>
+                <h6 class="mb-1">📱 Install KaamKaro App</h6>
+                <small>Get better experience with our app</small>
+            </div>
+            <button class="btn btn-primary btn-sm" onclick="installApp()">Install</button>
+        </div>
+        <button class="btn-close position-absolute top-0 end-0 m-2" onclick="hideInstallBanner()"></button>
+    </div>
+    
+    <!-- Bootstrap & jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- KaamKaro App JavaScript -->
+    <script>
+        // ============================================================================
+        // CONFIGURATION
+        // ============================================================================
+        
+        // Production Backend URL - Replace with your Render URL
+        const PRODUCTION_BACKEND = 'https://kaamkaro-backend.onrender.com';
+        const LOCAL_BACKEND = 'http://localhost:5000';
+        
+        let currentApiUrl = '';
+        let currentUser = null;
+        let userBalance = 0.00;
+        let debugMode = false;
+        let deferredPrompt = null;
+        let currentTab = 'home';
+        
+        // ============================================================================
+        // INITIALIZATION
+        // ============================================================================
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🚀 KaamKaro App Initializing...');
+            
+            // Auto-detect environment
+            detectEnvironment();
+            
+            // Check for saved user
+            loadSavedUser();
+            
+            // Setup tab listeners
+            setupTabListeners();
+            
+            // Setup modals
+            setupModals();
+            
+            // Register service worker for PWA
+            registerServiceWorker();
+            
+            console.log('✅ App initialization complete');
+        });
+        
+        function detectEnvironment() {
+            const hostname = window.location.hostname;
+            
+            if (hostname.includes('localhost') || hostname === '127.0.0.1') {
+                currentApiUrl = LOCAL_BACKEND;
+                console.log('🌐 Local development mode');
+            } else if (hostname.includes('netlify.app') || hostname.includes('onrender.com')) {
+                currentApiUrl = PRODUCTION_BACKEND;
+                console.log('🌐 Production mode');
+            } else {
+                currentApiUrl = PRODUCTION_BACKEND; // Default to production
+                console.log('🌐 Using production backend');
+            }
+            
+            // Update connection status
+            updateConnectionStatus('checking', 'Detecting environment...');
+            
+            // Test connection
+            testConnection();
+        }
+        
+        function loadSavedUser() {
+            const savedUser = localStorage.getItem('kaamkaro_user');
+            if (savedUser) {
+                try {
+                    currentUser = JSON.parse(savedUser);
+                    userBalance = currentUser.balance || 0;
+                    updateUserProfile();
+                    updateBalanceDisplay();
+                    console.log('👤 User restored from localStorage');
+                } catch (e) {
+                    console.error('Error parsing saved user:', e);
+                }
+            }
+        }
+        
+        function setupTabListeners() {
+            // Tab click events
+            document.querySelectorAll('[data-bs-toggle="tab"]').forEach(tab => {
+                tab.addEventListener('shown.bs.tab', function(e) {
+                    const target = e.target.getAttribute('data-bs-target');
+                    currentTab = target.replace('#', '');
+                    console.log(`📱 Switched to tab: ${currentTab}`);
+                    
+                    // Load content based on tab
+                    switch(currentTab) {
+                        case 'tasks':
+                            loadTasks();
+                            break;
+                        case 'earn':
+                            loadEarnData();
+                            break;
+                        case 'profile':
+                            updateUserProfile();
+                            break;
+                    }
+                });
+            });
+        }
+        
+        function setupModals() {
+            // Withdraw modal
+            const withdrawModal = document.getElementById('withdrawModal');
+            if (withdrawModal) {
+                withdrawModal.addEventListener('click', function(e) {
+                    if (e.target === this) {
+                        hideWithdrawModal();
+                    }
+                });
+            }
+        }
+        
+        // ============================================================================
+        // CONNECTION MANAGEMENT
+        // ============================================================================
+        
+        async function testConnection() {
+            const testResult = document.getElementById('testResult');
+            if (testResult) testResult.innerHTML = '<div class="spinner"></div> Testing...';
+            
+            try {
+                const response = await fetch(`${currentApiUrl}/api/health`);
+                if (response.ok) {
+                    const data = await response.json();
+                    updateConnectionStatus('connected', 'Server connected');
+                    
+                    if (testResult) {
+                        testResult.innerHTML = `
+                            <div class="alert alert-success">
+                                <strong>✅ CONNECTED!</strong><br>
+                                <small>Server: ${currentApiUrl}</small><br>
+                                <small>Status: ${data.status}</small><br>
+                                <small>Version: ${data.version}</small>
+                            </div>
+                        `;
+                    }
+                    
+                    console.log('✅ Server connected:', data);
+                    return true;
+                }
+            } catch (error) {
+                console.error('❌ Connection failed:', error);
+            }
+            
+            updateConnectionStatus('disconnected', 'Server not reachable');
+            
+            if (testResult) {
+                testResult.innerHTML = `
+                    <div class="alert alert-danger">
+                        <strong>❌ CONNECTION FAILED</strong><br>
+                        <small>Make sure backend server is running</small><br>
+                        <button class="btn btn-sm btn-warning mt-2" onclick="switchBackend()">Switch URL</button>
+                    </div>
+                `;
+            }
+            
+            return false;
+        }
+        
+        function switchBackend() {
+            currentApiUrl = currentApiUrl === PRODUCTION_BACKEND ? LOCAL_BACKEND : PRODUCTION_BACKEND;
+            console.log(`🔄 Switching to: ${currentApiUrl}`);
+            testConnection();
+        }
+        
+        function updateConnectionStatus(status, message) {
+            const statusElement = document.getElementById('connectionStatus');
+            const apiStatusText = document.getElementById('apiStatusText');
+            const connectionMessage = document.getElementById('connectionMessage');
+            
+            if (statusElement) {
+                statusElement.className = `connection-status ${status}`;
+                statusElement.textContent = status === 'connected' ? '✅ Online' : '❌ Offline';
+            }
+            
+            if (apiStatusText) {
+                apiStatusText.textContent = status === 'connected' ? 'Connected' : 'Disconnected';
+                apiStatusText.style.color = status === 'connected' ? 'green' : 'red';
+            }
+            
+            if (connectionMessage) {
+                connectionMessage.textContent = status === 'connected' ? 'Ready to earn money!' : 'Connecting to server...';
+            }
+        }
+        
+        // ============================================================================
+        // AUTHENTICATION
+        // ============================================================================
+        
+        async function login() {
+            if (!await testConnection()) {
+                showNotification('Cannot connect to server', 'error');
+                return;
+            }
+            
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            
+            if (!email || !password) {
+                showNotification('Please enter email and password', 'error');
+                return;
+            }
+            
+            showLoading('Logging in...');
+            
+            try {
+                const response = await fetch(`${currentApiUrl}/api/login`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify({ email, password })
+                });
+                
+                const data = await response.json();
+                
+                if (data.error) {
+                    showNotification(data.error, 'error');
+                } else {
+                    // Save user data
+                    currentUser = data.user;
+                    userBalance = data.user.balance || 0;
+                    
+                    localStorage.setItem('kaamkaro_user', JSON.stringify(currentUser));
+                    localStorage.setItem('kaamkaro_token', data.token || 'demo-token');
+                    
+                    showNotification(data.message + (data.daily_bonus ? ` + ₹${data.daily_bonus} daily bonus!` : ''), 'success');
+                    
+                    // Update UI
+                    updateUserProfile();
+                    updateBalanceDisplay();
+                    loadDashboardData();
+                    
+                    // Switch to home tab
+                    document.getElementById('home-tab').click();
+                    
+                    console.log('👤 User logged in:', email);
+                }
+            } catch (error) {
+                console.error('Login error:', error);
+                showNotification('Network error. Please try again.', 'error');
+            } finally {
+                hideLoading();
+            }
+        }
+        
+        async function register() {
+            if (!await testConnection()) {
+                showNotification('Cannot connect to server', 'error');
+                return;
+            }
+            
+            const name = document.getElementById('regName').value;
+            const email = document.getElementById('regEmail').value;
+            const password = document.getElementById('regPassword').value;
+            const phone = document.getElementById('regPhone').value;
+            const referralCode = document.getElementById('regReferral').value;
+            
+            if (!name || !email || !password) {
+                showNotification('Please fill all required fields', 'error');
+                return;
+            }
+            
+            if (password.length < 6) {
+                showNotification('Password must be at least 6 characters', 'error');
+                return;
+            }
+            
+            showLoading('Creating account...');
+            
+            try {
+                const response = await fetch(`${currentApiUrl}/api/register`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        name,
+                        email,
+                        password,
+                        phone,
+                        referral_code: referralCode || null
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (data.error) {
+                    showNotification(data.error, 'error');
+                } else {
+                    showNotification('Account created! ₹50 welcome bonus credited.', 'success');
+                    
+                    // Auto login
+                    document.getElementById('loginEmail').value = email;
+                    document.getElementById('loginPassword').value = password;
+                    setTimeout(() => login(), 1000);
+                    
+                    console.log('👤 New user registered:', email);
+                }
+            } catch (error) {
+                console.error('Registration error:', error);
+                showNotification('Network error. Please try again.', 'error');
+            } finally {
+                hideLoading();
+            }
+        }
+        
+        function logout() {
+            currentUser = null;
+            userBalance = 0;
+            
+            localStorage.removeItem('kaamkaro_user');
+            localStorage.removeItem('kaamkaro_token');
+            
+            document.getElementById('authSection').style.display = 'block';
+            document.getElementById('loggedInSection').style.display = 'none';
+            document.getElementById('balanceAmount').textContent = '₹ 0.00';
+            
+            showNotification('Logged out successfully', 'info');
+            console.log('👤 User logged out');
+            
+            document.getElementById('profile-tab').click();
+        }
+        
+        // ============================================================================
+        // TASK MANAGEMENT
+        // ============================================================================
+        
+        async function loadTasks() {
+            if (!currentUser && !(await testConnection())) {
+                showNotification('Please login first', 'error');
+                return;
+            }
+            
+            const spinner = document.getElementById('tasksSpinner');
+            const container = document.getElementById('tasksContainer');
+            
+            if (spinner) spinner.style.display = 'block';
+            if (container) container.innerHTML = '<div class="text-center"><p>Loading tasks...</p></div>';
+            
+            try {
+                const response = await fetch(`${currentApiUrl}/api/tasks`);
+                const data = await response.json();
+                
+                if (data.success) {
+                    renderTasks(data.tasks || []);
+                    console.log(`✅ Loaded ${data.tasks?.length || 0} tasks`);
+                } else {
+                    showNotification('Failed to load tasks', 'error');
+                    loadDemoTasks();
+                }
+            } catch (error) {
+                console.error('Load tasks error:', error);
+                showNotification('Network error loading tasks', 'error');
+                loadDemoTasks();
+            } finally {
+                if (spinner) spinner.style.display = 'none';
+            }
+        }
+        
+        function renderTasks(tasks) {
+            const container = document.getElementById('tasksContainer');
+            if (!container) return;
+            
+            if (tasks.length === 0) {
+                container.innerHTML = '<div class="text-center p-4"><p>No tasks available. Check back later!</p></div>';
+                return;
+            }
+            
+            let html = '';
+            tasks.forEach(task => {
+                html += `
+                    <div class="task-card fade-in">
+                        <div class="d-flex align-items-start">
+                            <div class="task-icon">
+                                <i class="fas ${getTaskIcon(task.type)}"></i>
+                            </div>
+                            <div class="flex-grow-1">
+                                <h6>${task.title}</h6>
+                                <small class="text-muted">${task.description}</small>
+                                <div class="d-flex justify-content-between align-items-center mt-2">
+                                    <span class="task-reward">₹${task.reward?.toFixed(2)}</span>
+                                    <span><i class="fas fa-clock"></i> ${task.duration || 30}s</span>
+                                </div>
+                                <button class="btn-earn mt-2" onclick="completeTask(${task.id})" ${!currentUser ? 'disabled' : ''}>
+                                    <i class="fas fa-play-circle"></i> ${!currentUser ? 'Login to Start' : 'Start Task'}
+                                </button>
+                                ${task.daily_limit > 1 ? `<small class="text-muted d-block mt-1"><i class="fas fa-redo"></i> Daily limit: ${task.daily_limit}</small>` : ''}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = html;
+        }
+        
+        function getTaskIcon(taskType) {
+            const icons = {
+                'video': 'fa-video',
+                'survey': 'fa-poll',
+                'install': 'fa-download',
+                'read': 'fa-newspaper',
+                'game': 'fa-gamepad',
+                'music': 'fa-music',
+                'photo': 'fa-camera',
+                'review': 'fa-star',
+                'default': 'fa-tasks'
+            };
+            return icons[taskType] || icons.default;
+        }
+        
+        async function completeTask(taskId) {
+            if (!currentUser) {
+                showNotification('Please login first', 'error');
+                document.getElementById('profile-tab').click();
+                return;
+            }
+            
+            if (!await testConnection()) {
+                showNotification('Cannot connect to server', 'error');
+                return;
+            }
+            
+            showLoading('Completing task...');
+            
+            try {
+                const response = await fetch(`${currentApiUrl}/api/tasks/complete`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        user_id: currentUser.id,
+                        task_id: taskId
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (data.error) {
+                    showNotification(data.error, 'error');
+                } else {
+                    // Update user data
+                    currentUser.balance = data.new_balance;
+                    currentUser.tasks_done = (currentUser.tasks_done || 0) + 1;
+                    userBalance = data.new_balance;
+                    
+                    localStorage.setItem('kaamkaro_user', JSON.stringify(currentUser));
+                    
+                    // Update UI
+                    updateBalanceDisplay();
+                    updateTasksCounter();
+                    
+                    showNotification(`✅ ${data.message}`, 'success');
+                    console.log(`✅ Task ${taskId} completed. Earned: ₹${data.reward}`);
+                    
+                    // Refresh tasks after 1 second
+                    setTimeout(() => loadTasks(), 1000);
+                    
+                    // Load updated user data
+                    loadUserProfile();
+                }
+            } catch (error) {
+                console.error('Complete task error:', error);
+                showNotification('Network error. Please try again.', 'error');
+            } finally {
+                hideLoading();
+            }
+        }
+        
+        function loadDemoTasks() {
+            const demoTasks = [
+                {
+                    "id": 1,
+                    "title": "Watch Video Advertisement",
+                    "description": "Watch a 30-second video ad to earn money",
+                    "type": "video",
+                    "reward": 5.00,
+                    "duration": 30,
+                    "daily_limit": 5
+                },
+                {
+                    "id": 2,
+                    "title": "Complete Survey",
+                    "description": "Answer a quick survey about products",
+                    "type": "survey",
+                    "reward": 10.00,
+                    "duration": 120,
+                    "daily_limit": 3
+                }
+            ];
+            renderTasks(demoTasks);
+        }
+        
+        // ============================================================================
+        // WITHDRAWAL SYSTEM
+        // ============================================================================
+        
+        function showWithdrawModal() {
+            if (!currentUser) {
+                showNotification('Please login first', 'error');
+                document.getElementById('profile-tab').click();
+                return;
+            }
+            
+            if (userBalance < 100) {
+                showNotification('Minimum withdrawal amount is ₹100', 'error');
+                return;
+            }
+            
+            document.getElementById('withdrawAmount').value = '';
+            document.getElementById('withdrawUpi').value = '';
+            document.getElementById('withdrawModal').style.display = 'flex';
+        }
+        
+        function hideWithdrawModal() {
+            document.getElementById('withdrawModal').style.display = 'none';
+        }
+        
+        async function submitWithdrawal() {
+            const amount = parseFloat(document.getElementById('withdrawAmount').value);
+            const upi = document.getElementById('withdrawUpi').value.trim();
+            
+            if (!amount || amount < 100) {
+                showNotification('Minimum withdrawal amount is ₹100', 'error');
+                return;
+            }
+            
+            if (!upi || !upi.includes('@')) {
+                showNotification('Please enter valid UPI ID (example@upi)', 'error');
+                return;
+            }
+            
+            if (amount > userBalance) {
+                showNotification('Insufficient balance', 'error');
+                return;
+            }
+            
+            if (amount > 10000) {
+                showNotification('Maximum withdrawal amount is ₹10,000', 'error');
+                return;
+            }
+            
+            showLoading('Processing withdrawal...');
+            
+            try {
+                const response = await fetch(`${currentApiUrl}/api/withdraw/request`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        user_id: currentUser.id,
+                        amount: amount,
+                        upi_id: upi
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (data.error) {
+                    showNotification(data.error, 'error');
+                } else {
+                    // Update user balance
+                    currentUser.balance = data.new_balance;
+                    userBalance = data.new_balance;
+                    localStorage.setItem('kaamkaro_user', JSON.stringify(currentUser));
+                    
+                    updateBalanceDisplay();
+                    hideWithdrawModal();
+                    
+                    showNotification(`✅ ${data.message}`, 'success');
+                    console.log(`✅ Withdrawal requested: ₹${amount} to ${upi}`);
+                    
+                    // Show success message
+                    showNotification('Withdrawal request submitted! Processed within 24 hours.', 'success');
+                }
+            } catch (error) {
+                console.error('Withdrawal error:', error);
+                showNotification('Network error. Please try again.', 'error');
+            } finally {
+                hideLoading();
+            }
+        }
+        
+        // ============================================================================
+        // DASHBOARD & PROFILE
+        // ============================================================================
+        
+        async function loadDashboardData() {
+            if (!currentUser) return;
+            
+            try {
+                // Load user profile data
+                const response = await fetch(`${currentApiUrl}/api/user/${currentUser.id}`);
+                const data = await response.json();
+                
+                if (data.success) {
+                    // Update stats
+                    document.getElementById('tasksDone').textContent = data.stats.tasks_completed || 0;
+                    document.getElementById('referralsCount').textContent = data.stats.referral_count || 0;
+                    
+                    // Update challenge progress
+                    const tasksCompleted = data.stats.tasks_completed || 0;
+                    const challengeProgress = Math.min((tasksCompleted / 10) * 100, 100);
+                    document.getElementById('challengeProgress').style.width = `${challengeProgress}%`;
+                    document.getElementById('challengeText').textContent = `${tasksCompleted}/10 completed`;
+                    
+                    // Update daily streak
+                    const dailyStreak = data.stats.daily_streak || 0;
+                    document.getElementById('dailyProgress').style.width = `${Math.min((dailyStreak / 7) * 100, 100)}%`;
+                    document.getElementById('dailyProgress').textContent = `Day ${dailyStreak}/7`;
+                    document.getElementById('dailyBonusText').textContent = dailyStreak >= 7 ? 'Maximum bonus reached!' : `Complete ${7 - dailyStreak} more days`;
+                    
+                    // Update referral code
+                    document.getElementById('referralCode').value = currentUser.referral_code || 'DEMO001';
+                    
+                    console.log('📊 Dashboard data loaded');
+                }
+            } catch (error) {
+                console.error('Load dashboard error:', error);
+            }
+        }
+        
+        function updateUserProfile() {
+            const profileDisplay = document.getElementById('profileDisplay');
+            const loggedInSection = document.getElementById('loggedInSection');
+            const authSection = document.getElementById('authSection');
+            
+            if (currentUser) {
+                // Update profile display
+                if (profileDisplay) {
+                    profileDisplay.innerHTML = `
+                        <div style="width: 80px; height: 80px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 50%; margin: 0 auto 15px; display: flex; align-items: center; justify-content: center; color: white; font-size: 36px;">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <h5>${currentUser.name || currentUser.email.split('@')[0]}</h5>
+                        <small class="text-muted">${currentUser.email}</small>
+                        <div style="margin-top: 10px;">
+                            <span class="badge bg-success fs-6">₹${currentUser.balance?.toFixed(2)}</span>
+                            <span class="badge bg-primary ms-2">${currentUser.tasks_done || 0} Tasks</span>
+                        </div>
+                        <div class="mt-2">
+                            <small>Referral Code: <strong class="text-primary">${currentUser.referral_code || 'DEMO001'}</strong></small>
+                        </div>
+                    `;
+                }
+                
+                // Show logged in section
+                if (loggedInSection) loggedInSection.style.display = 'block';
+                if (authSection) authSection.style.display = 'none';
+                
+                // Load additional data
+                loadDashboardData();
+                
+                console.log('👤 Profile updated for:', currentUser.email);
+            } else {
+                // Show login section
+                if (loggedInSection) loggedInSection.style.display = 'none';
+                if (authSection) authSection.style.display = 'block';
+                document.getElementById('loginSection').style.display = 'block';
+                document.getElementById('registerSection').style.display = 'none';
+            }
+        }
+        
+        function updateBalanceDisplay() {
+            const balanceElement = document.getElementById('balanceAmount');
+            if (balanceElement) {
+                balanceElement.textContent = `₹ ${userBalance.toFixed(2)}`;
+            }
+        }
+        
+        function updateTasksCounter() {
+            const tasksElement = document.getElementById('tasksDone');
+            if (tasksElement) {
+                const currentCount = parseInt(tasksElement.textContent) || 0;
+                tasksElement.textContent = currentCount + 1;
+            }
+        }
+        
+        async function loadUserProfile() {
+            if (!currentUser) return;
+            
+            try {
+                const response = await fetch(`${currentApiUrl}/api/user/${currentUser.id}`);
+                const data = await response.json();
+                
+                if (data.success) {
+                    // Update current user data
+                    currentUser = data.user;
+                    userBalance = data.user.balance;
+                    localStorage.setItem('kaamkaro_user', JSON.stringify(currentUser));
+                    
+                    // Update UI
+                    updateUserProfile();
+                    updateBalanceDisplay();
+                    
+                    console.log('👤 User profile refreshed');
+                }
+            } catch (error) {
+                console.error('Load user profile error:', error);
+            }
+        }
+        
+        // ============================================================================
+        // EARN TAB FUNCTIONS
+        // ============================================================================
+        
+        function loadEarnData() {
+            if (!currentUser) return;
+            
+            // Load referral stats
+            loadReferralStats();
+            
+            // Update referral code
+            document.getElementById('referralCode').value = currentUser.referral_code || 'DEMO001';
+        }
+        
+        async function loadReferralStats() {
+            if (!currentUser) return;
+            
+            try {
+                const response = await fetch(`${currentApiUrl}/api/referral/stats/${currentUser.id}`);
+                const data = await response.json();
+                
+                if (data.success) {
+                    document.getElementById('referralsCount').textContent = data.summary?.total_referrals || 0;
+                    console.log('📊 Referral stats loaded:', data.summary);
+                }
+            } catch (error) {
+                console.error('Load referral stats error:', error);
+            }
+        }
+        
+        // ============================================================================
+        // UTILITY FUNCTIONS
+        // ============================================================================
+        
+        function showNotification(message, type = 'info') {
+            const notification = document.getElementById('notification');
+            if (!notification) return;
+            
+            notification.className = `notification ${type}`;
+            notification.textContent = message;
+            notification.style.display = 'block';
+            
+            // Auto hide after 4 seconds
+            setTimeout(() => {
+                notification.style.display = 'none';
+            }, 4000);
+            
+            console.log(`📢 ${type}: ${message}`);
+        }
+        
+        function showLoading(message = '') {
+            // You can implement a loading spinner here
+            if (message) {
+                showNotification(message, 'info');
+            }
+        }
+        
+        function hideLoading() {
+            // Hide loading spinner
+        }
+        
+        function showLoginForm() {
+            document.getElementById('loginSection').style.display = 'block';
+            document.getElementById('registerSection').style.display = 'none';
+        }
+        
+        function showRegisterForm() {
+            document.getElementById('loginSection').style.display = 'none';
+            document.getElementById('registerSection').style.display = 'block';
+        }
+        
+        function copyReferralCode() {
+            const codeInput = document.getElementById('referralCode');
+            if (!codeInput) return;
+            
+            codeInput.select();
+            codeInput.setSelectionRange(0, 99999);
+            document.execCommand('copy');
+            
+            showNotification('Referral code copied to clipboard!', 'success');
+        }
+        
+        function refreshTasks() {
+            loadTasks();
+            showNotification('Tasks refreshed', 'info');
+        }
+        
+        function claimDailyBonus() {
+            showNotification('Daily bonus automatically credited on login!', 'info');
+        }
+        
+        function showTransactionHistory() {
+            showNotification('Transaction history coming soon!', 'info');
+        }
+        
+        function showReferrals() {
+            showNotification('Referral dashboard coming soon!', 'info');
+        }
+        
+        function showSupport() {
+            showNotification('Contact support@kaamkaro.com', 'info');
+        }
+        
+        // ============================================================================
+        // PWA FUNCTIONS
+        // ============================================================================
+        
+        function registerServiceWorker() {
+            if ('serviceWorker' in navigator) {
+                window.addEventListener('load', () => {
+                    navigator.serviceWorker.register('/service-worker.js')
+                        .then(registration => {
+                            console.log('✅ ServiceWorker registered:', registration.scope);
+                        })
+                        .catch(error => {
+                            console.log('❌ ServiceWorker registration failed:', error);
+                        });
+                });
+            }
+        }
+        
+        // PWA Install Prompt
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            showInstallBanner();
+        });
+        
+        function showInstallBanner() {
+            const installBanner = document.getElementById('installBanner');
+            if (installBanner && !window.matchMedia('(display-mode: standalone)').matches) {
+                setTimeout(() => {
+                    installBanner.style.display = 'block';
+                }, 5000);
+            }
+        }
+        
+        function hideInstallBanner() {
+            const installBanner = document.getElementById('installBanner');
+            if (installBanner) installBanner.style.display = 'none';
+        }
+        
+        async function installApp() {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                const { outcome } = await deferredPrompt.userChoice;
+                if (outcome === 'accepted') {
+                    console.log('✅ PWA installed');
+                    hideInstallBanner();
+                }
+                deferredPrompt = null;
+            }
+        }
+        
+        // ============================================================================
+        // DEBUG FUNCTIONS
+        // ============================================================================
+        
+        function toggleDebug() {
+            debugMode = !debugMode;
+            const testResult = document.getElementById('testResult');
+            if (testResult) {
+                if (debugMode) {
+                    testResult.innerHTML += '<div class="alert alert-info">Debug mode enabled - Check console</div>';
+                    console.log('🔧 Debug mode enabled');
+                } else {
+                    testResult.innerHTML += '<div class="alert alert-secondary">Debug mode disabled</div>';
+                }
+            }
+        }
+    </script>
+</body>
+</html>
